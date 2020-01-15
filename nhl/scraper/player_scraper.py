@@ -1,5 +1,5 @@
-from nhl.scraper.scraper import Scraper
-from utils import utils
+from hockey_scraper.nhl.scraper.scraper import Scraper
+from hockey_scraper.utils import utils
 
 
 class PlayerScraper(Scraper):
