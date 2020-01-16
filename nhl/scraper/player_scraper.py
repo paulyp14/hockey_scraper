@@ -32,7 +32,12 @@ class PlayerScraper(Scraper):
 
         self.player_info['height'] = utils.format_nhl_height_for_insert(self.player_info['height'])
         self.player_info['teams'] = [self.player_info['current_team']]
-        self.player_info['birth_state'] = self.player_info.pop('birth_state_province')
+        
+        if 'birth_state_province' in self.player_info.keys():
+            self.player_info['birth_state'] = self.player_info.pop('birth_state_province')
+        else:
+            self.player_info['birth_state'] = ''
+
         self.player_info['primary_number'] = int(self.player_info['primary_number'])
 
         self.player_info['active'] = str(self.player_info['active']).lower()
