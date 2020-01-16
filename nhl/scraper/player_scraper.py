@@ -18,6 +18,13 @@ class PlayerScraper(Scraper):
         nhl_id = self.player_info.pop('nhl_id')
         self.player_info['reference_ids'] = {'1': nhl_id}
 
+        if self.player_info['captain']:
+            self.player_info['captain'] = 'C'
+        elif self.player_info['alternate_captain']:
+            self.player_info['captain'] = 'A'
+        else:
+            self.player_info['captain'] = ''
+
         self.player_info.pop('full_name')
         self.player_info.pop('current_age')
         self.player_info.pop('alternate_captain')
@@ -27,6 +34,9 @@ class PlayerScraper(Scraper):
         self.player_info['teams'] = [self.player_info['current_team']]
         self.player_info['birth_state'] = self.player_info.pop('birth_state_province')
         self.player_info['primary_number'] = int(self.player_info['primary_number'])
+
+        self.player_info['active'] = str(self.player_info['active']).lower()
+        self.player_info['rookie'] = str(self.player_info['rookie']).lower()
 
         self.format_birthday()
 
